@@ -84,7 +84,7 @@ function login() {
     const password = document.getElementById('password').value;
     if (users[username] && users[username].password === password) {
         currentUser = username;
-        document.getElementById('loginRegisterArea').style.display = 'none';
+        document.getElementById('loginRegister').style.display = 'none';
         document.getElementById('taskArea').style.display = 'block';
         renderTasks();
     } else {
@@ -94,7 +94,7 @@ function login() {
 
 function logout() {
     currentUser = null;
-    document.getElementById('loginRegisterArea').style.display = 'block';
+    document.getElementById('loginRegister').style.display = 'block';
     document.getElementById('taskArea').style.display = 'none';
 }
 
