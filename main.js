@@ -1,12 +1,16 @@
 const input = document.querySelector("input");
+const inputTask = document.getElementById("taskName");
 const addBtn = document.querySelector(".btn-add");
 const ul = document.querySelector("ul");
 const empty = document.querySelector(".empty");
 
+const usuarioCorrecto = ""; 
+const contraseñaCorrecta = "";
+
 addBtn.addEventListener("click", (e) => {
     e.preventDefault();
 
-    const text = input.value;
+    const text = inputTask.value;
 
     if (text !== "") {
         const li = document.createElement("li");
@@ -17,7 +21,7 @@ addBtn.addEventListener("click", (e) => {
         li.appendChild(addDeleteBtn());
         ul.appendChild(li);
 
-        input.value = "";
+        inputTask.value = "";
         empty.style.display = "none";
     }
 });
@@ -43,8 +47,6 @@ function addDeleteBtn() {
 }
 
 function InicioSesion() {
-    const usuarioCorrecto = "Maria"; 
-    const contraseñaCorrecta = "1234";
     let intentos = 0;
 
     while (intentos < 3) {
@@ -63,7 +65,7 @@ function InicioSesion() {
     alert("Has superado el número máximo de intentos.");
 }
 
-InicioSesion();
+// InicioSesion();
 
 const users = {}; 
 let currentUser = null; 
@@ -71,12 +73,13 @@ let currentUser = null;
 function register() {
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
-    if (users[username]) {
-        alert('usuario ya existe');
-    } else {
-        users[username] = { password, tasks: [] };
+
+    
+    users[username] = { password, tasks: [] };
+    if(username=== "" && password === "")
+        alert("Ingrese usuario y/o contrasena");
+    else
         alert('Registro exitoso');
-    }
 }
 
 function login() {
@@ -85,7 +88,8 @@ function login() {
     if (users[username] && users[username].password === password) {
         currentUser = username;
         document.getElementById('loginRegister').style.display = 'none';
-        document.getElementById('taskArea').style.display = 'block';
+        document.getElementById('listaTareas').style.display = 'block';
+        document.getElementById('listaTareas').style.display = 'block';
         renderTasks();
     } else {
         alert('Usuario o contraseña incorrectos');
@@ -95,7 +99,7 @@ function login() {
 function logout() {
     currentUser = null;
     document.getElementById('loginRegister').style.display = 'block';
-    document.getElementById('taskArea').style.display = 'none';
+    document.getElementById('listaTareas').style.display = 'none';
 }
 
 function addTask() {
@@ -116,6 +120,8 @@ function renderTasks() {
         taskList.appendChild(li);
     });
 }
+
+document.getElementById('listaTareas').style.display = 'none';
 
 document.getElementById('username').addEventListener('keyup', function(event) {
     if (event.key === 'Enter') login();
